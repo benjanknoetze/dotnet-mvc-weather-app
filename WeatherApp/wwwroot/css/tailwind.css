@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+      @apply text-base font-sans h-full w-full bg-gray-100;
+    }
+    body {
+      @apply mx-auto p-0 h-full w-full text-gray-800 bg-white;
+    }
+    h1 {
+      @apply text-2xl;
+    }
+    p {
+      @apply text-base;
+    }
+  }
