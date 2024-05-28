@@ -1,0 +1,13 @@
+@model WeatherApp.Models.WeatherResponse
+
+@if (Model != null)
+{
+    <div>
+        <container>
+            <h2>@Model.Location.Name, @Model.Location.Country</h2>
+            <p>Temperature: @Model.Current.Temp_c &deg;C / @Model.Current.Temp_f &deg;F</p>
+            <p>Condition: @Model.Current.Condition.Text</p>
+            <img src="@Model.Current.Condition.Icon" alt="Weather icon" />
+        </container>
+    </div>
+}
