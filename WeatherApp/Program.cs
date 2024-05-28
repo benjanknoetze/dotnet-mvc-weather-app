@@ -1,7 +1,12 @@
+using WeatherApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register the WeatherService
+builder.Services.AddSingleton<WeatherService>();
 
 var app = builder.Build();
 
