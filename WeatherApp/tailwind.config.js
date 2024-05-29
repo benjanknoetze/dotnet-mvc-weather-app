@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        'custom-light': 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+        'custom-light': '#0169aa69 0 0 20px -10px',
       }
     },
   },

@@ -29,8 +29,6 @@ public class WeatherService
             throw new InvalidOperationException("Failed to retrieve weather data.");
         }
 
-        Console.WriteLine($"Weather API Response: {response.Content}");
-
         try
         {
             var weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(response.Content);
@@ -62,8 +60,6 @@ public class WeatherService
             Console.WriteLine("No response from Weather API.");
             throw new InvalidOperationException("Failed to retrieve location suggestions.");
         }
-
-        Console.WriteLine($"Weather API Search Response: {response.Content}");
 
         try
         {

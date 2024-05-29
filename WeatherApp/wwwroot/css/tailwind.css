@@ -2,21 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
     html {
-      @apply text-base font-sans p-3 h-full w-full bg-[#f1fbff] text-center;
+      @apply text-base font-sans h-full w-full bg-white text-center text-[#003f57];
     }
     body {
-      @apply flex justify-center h-full w-full text-gray-800;
+      @apply flex justify-center h-full w-full;
+      background-image: url(../images/clouds.jpeg);
+      background-position: 50% 50%;
+      background-size: cover;
     }
     h1 {
-      @apply text-2xl;
+      @apply text-2xl font-bold;
     }
     p {
       @apply text-base;
     }
+    button {
+      @apply w-48 px-4 py-2 text-white bg-[#45b5de] font-bold rounded-md;
+    }
     .card {
-      @apply my-5 rounded border-none p-3 shadow-custom-light;
+      @apply w-[80%] bg-[#f3f3f10d] mx-auto my-7 rounded border-none p-5 shadow-custom-light;
     }
     #spinner {
       @apply w-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
