@@ -4,13 +4,13 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="container">
+<div class="container mt-10">
     <h1 class="text-2xl font-bold">Your Weather, Your Way</h1>
 </div>
 
-<div class="container card">
-    <form id="weatherForm" class="flex flex-col space-y-4" method="post" asp-action="GetWeather" asp-controller="Weather" asp-antiforgery="true">
-        <input id="locationInput" type="text" name="location" placeholder="Enter location" required class="p-2 border border-gray-300 rounded" />
+<div class="container card mt-10">
+    <form id="weatherForm" class="space-y-4" method="post" asp-action="GetWeather" asp-controller="Weather" asp-antiforgery="true">
+        <input id="locationInput" type="text" name="location" placeholder="Enter location" required class="p-2 border border-[#599fc8] bg-[#ffffff60] rounded-xl" />
         <div>
             <label class="mr-4">
                 <input type="radio" name="isCelsius" value="true" checked class="mr-2" /> Celsius
@@ -19,12 +19,13 @@
                 <input type="radio" name="isCelsius" value="false" class="mr-2" /> Fahrenheit
             </label>
         </div>
-        <button type="submit" class="px-4 py-2 bg-blue-300 text-white rounded">Get Weather</button>
+        <button type="submit">Submit</button>
     </form>
 </div>
 
 <div class="container card hidden" id="weatherDetailsCard">
     <div id="weatherDetails"></div>
+    <button id="refreshButton" class="mt-4">Refresh</button>
 </div>
 
 <div id="spinner" class="hidden">
@@ -41,8 +42,10 @@
                 event.preventDefault();
                 const form = $(this);
                 const data = form.serialize();
+                
                 $('#weatherDetailsCard').addClass('hidden');
                 $('#spinner').removeClass('hidden');
+                
                 $.ajax({
                     type: 'POST',
                     url: form.attr('action'),
@@ -54,10 +57,14 @@
                     error: function() {
                         alert('Error retrieving weather data.');
                     },
-                     complete: function() {
+                    complete: function() {
                         $('#spinner').addClass('hidden');
                     }
                 });
+            });
+
+            $('#refreshButton').on('click', function() {
+                $('#weatherForm').submit();
             });
 
             $('#locationInput').autocomplete({
