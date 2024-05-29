@@ -2,17 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer components {
     html {
-      @apply text-base font-sans p-3 h-full w-full bg-gray-100 text-center;
+      @apply text-base font-sans p-3 h-full w-full bg-[#f1fbff] text-center;
     }
     body {
-      @apply h-full w-full text-gray-800;
+      @apply flex justify-center h-full w-full text-gray-800;
     }
     h1 {
       @apply text-2xl;
     }
     p {
       @apply text-base;
+    }
+    .card {
+      @apply my-5 rounded border-none p-3 shadow-custom-light;
     }
   }
