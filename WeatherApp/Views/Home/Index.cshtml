@@ -5,34 +5,64 @@
 }
 
 <div class="container">
-    <h1>Your Weather, Your Way</h1>
-    <form id="weatherForm" method="post" asp-action="GetWeather" asp-controller="Weather">
-        <input type="text" name="location" placeholder="Enter location" required />
-        <label>
-            <input type="radio" name="isCelsius" value="true" checked /> Celsius
-        </label>
-        <label>
-            <input type="radio" name="isCelsius" value="false" /> Fahrenheit
-        </label>
-        <button type="submit">Get Weather</button>
-        </form>
-    <div id="weatherDetails">
-       @await Html.PartialAsync("~/Views/Weather/_WeatherPartial.cshtml", Model)
-    </div>
+    <h1 class="text-2xl font-bold">Your Weather, Your Way</h1>
+</div>
+
+<div class="container card">
+    <form id="weatherForm" class="flex flex-col space-y-4" method="post" asp-action="GetWeather" asp-controller="Weather" asp-antiforgery="true">
+        <input id="locationInput" type="text" name="location" placeholder="Enter location" required class="p-2 border border-gray-300 rounded" />
+        <div>
+            <label class="mr-4">
+                <input type="radio" name="isCelsius" value="true" checked class="mr-2" /> Celsius
+            </label>
+            <label>
+                <input type="radio" name="isCelsius" value="false" class="mr-2" /> Fahrenheit
+            </label>
+        </div>
+        <button type="submit" class="px-4 py-2 bg-blue-300 text-white rounded">Get Weather</button>
+    </form>
+</div>
+
+<div class="container card hidden" id="weatherDetailsCard">
+    <div id="weatherDetails"></div>
 </div>
 
 @section Scripts {
     <script>
-        document.getElementById('weatherForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const form = event.target;
-            const data = new FormData(form);
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: data
+        $(document).ready(function() {
+            $('#weatherForm').on('submit', function(event) {
+                event.preventDefault();
+                const form = $(this);
+                const data = form.serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: data,
+                    success: function(result) {
+                        $('#weatherDetails').html(result);
+                        $('#weatherDetailsCard').removeClass('hidden');
+                    },
+                    error: function() {
+                        alert('Error retrieving weather data.');
+                    }
+                });
             });
-            const result = await response.text();
-            document.getElementById('weatherDetails').innerHTML = result;
+
+            $('#locationInput').autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: '/api/Search',
+                        data: { query: request.term },
+                        success: function(data) {
+                            response(data);
+                        },
+                        error: function() {
+                            console.error("Error fetching autocomplete suggestions");
+                        }
+                    });
+                },
+                minLength: 2
+            });
         });
     </script>
 }

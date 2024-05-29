@@ -2,12 +2,10 @@
 
 @if (Model != null)
 {
-    <div>
-        <container>
-            <h2>@Model.Location.Name, @Model.Location.Country</h2>
-            <p>Temperature: @Model.Current.Temp_c &deg;C / @Model.Current.Temp_f &deg;F</p>
-            <p>Condition: @Model.Current.Condition.Text</p>
-            <img src="@Model.Current.Condition.Icon" alt="Weather icon" />
-        </container>
+    <div class="container">
+        <img src="@Model.Current.Condition.Icon" alt="Weather icon" class="mx-auto" />
+        <h2>@Model.Location.Name, @Model.Location.Country</h2>
+        <p>Temperature: @Model.Current.TempC &deg;C / @Model.Current.TempC &deg;F</p>
+        <p>Condition: @Model.Current.Condition.Text</p>
     </div>
 }
