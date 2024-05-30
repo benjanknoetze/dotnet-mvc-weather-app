@@ -20,17 +20,19 @@ public class WeatherController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetWeather(string location, bool isCelsius)
+    public async Task<IActionResult> GetWeather(string location, string region, string country, bool isCelsius)
     {
-            try
-            {
-                var weather = await _weatherService.GetWeatherAsync(location, ApiKey, isCelsius);
-                return PartialView("~/Views/Weather/_WeatherPartial.cshtml", weather);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error retrieving weather data: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+        try
+        {
+            var searchQuery = $"{location},{region},{country}";
+            var weather = await _weatherService.GetWeatherAsync(searchQuery, ApiKey, isCelsius); ;
+            ViewData["IsCelsius"] = isCelsius;
+            return PartialView("~/Views/Weather/_WeatherPartial.cshtml", weather);
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error retrieving weather data: {ex.Message}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

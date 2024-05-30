@@ -22,6 +22,10 @@
     button {
       @apply w-48 px-4 py-2 text-white bg-[#45b5de] font-bold rounded-md;
     }
+    input:checked ~ .dot {
+      transform: translateX(100%);
+      background-color: #45b5de;
+    }
     .card {
       @apply w-[80%] bg-[#f3f3f10d] mx-auto my-7 rounded border-none p-5 shadow-custom-light;
     }
