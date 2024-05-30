@@ -10,13 +10,19 @@
 
 <div class="container card mt-10">
     <form id="weatherForm" class="space-y-4" method="post" asp-action="GetWeather" asp-controller="Weather" asp-antiforgery="true">
-        <input id="locationInput" type="text" name="location" placeholder="Enter location" required class="p-2 border border-[#599fc8] bg-[#ffffff60] rounded-xl" />
+        <input id="locationInput" type="text" name="location" placeholder="Enter location" required class="w-4/5 p-2 border border-[#599fc8] bg-[#ffffff60] rounded-xl" />
+        <input type="hidden" id="regionInput" name="region" />
+        <input type="hidden" id="countryInput" name="country" />
         <div>
-            <label class="mr-4">
-                <input type="radio" name="isCelsius" value="true" checked class="mr-2" /> Celsius
-            </label>
-            <label>
-                <input type="radio" name="isCelsius" value="false" class="mr-2" /> Fahrenheit
+            <label for="unitToggle" class="flex justify-center items-center cursor-pointer mb-2">
+                <div class="relative">
+                    <input type="checkbox" id="unitToggle" name="isCelsius" value="true" class="sr-only" checked />
+                    <div class="w-10 h-4 bg-gray-200 rounded-full shadow-inner"></div>
+                    <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                </div>
+                <div class="ml-3 text-gray-700 font-light">
+                    <span id="unitLabel">Celsius</span>
+                </div>
             </label>
         </div>
         <button type="submit">Submit</button>
@@ -41,11 +47,16 @@
             $('#weatherForm').on('submit', function(event) {
                 event.preventDefault();
                 const form = $(this);
-                const data = form.serialize();
-                
+                const data = {
+                    location: $('#locationInput').val(),
+                    region: $('#regionInput').val(),
+                    country: $('#countryInput').val(),
+                    isCelsius: $('#unitToggle').val()
+                };
+
                 $('#weatherDetailsCard').addClass('hidden');
                 $('#spinner').removeClass('hidden');
-                
+
                 $.ajax({
                     type: 'POST',
                     url: form.attr('action'),
@@ -73,14 +84,41 @@
                         url: '/api/Search',
                         data: { query: request.term },
                         success: function(data) {
-                            response(data);
+                            response($.map(data, function(item) {
+                                return {
+                                    label: `${item.name}, ${item.region}, ${item.country}`,
+                                    value: item.name,
+                                    region: item.region,
+                                    country: item.country
+                                };
+                            }));
                         },
                         error: function() {
                             console.error("Error fetching autocomplete suggestions");
                         }
                     });
                 },
-                minLength: 2
+                minLength: 2,
+                select: function(event, ui) {
+                    $('#locationInput').val(ui.item.value);
+                    $('#regionInput').val(ui.item.region);
+                    $('#countryInput').val(ui.item.country);
+                    return false;
+                }
+            });
+
+            $('#unitToggle').on('change', function() {
+                const isChecked = $(this).is(':checked');
+                $('#unitToggle').val(isChecked ? 'true' : 'false');
+                $('#unitLabel').text(isChecked ? 'Celsius' : 'Fahrenheit');
+
+                if (isChecked) {
+                    $('#tempC').removeClass('hidden');
+                    $('#tempF').addClass('hidden');
+                } else {
+                    $('#tempC').addClass('hidden');
+                    $('#tempF').removeClass('hidden');
+                }
             });
         });
     </script>

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services;
+
 public class WeatherService
 {
     private readonly RestClient _client;
@@ -14,11 +15,11 @@ public class WeatherService
         _client = new RestClient("https://api.weatherapi.com/v1");
     }
 
-    public async Task<WeatherResponse> GetWeatherAsync(string location, string apiKey, bool isCelsius)
+    public async Task<WeatherResponse> GetWeatherAsync(string searchQuery, string apiKey, bool isCelsius)
     {
         var request = new RestRequest("current.json", Method.Get);
         request.AddParameter("key", apiKey);
-        request.AddParameter("q", location);
+        request.AddParameter("q", searchQuery);
         request.AddParameter("aqi", "no");
 
         var response = await _client.ExecuteAsync(request);
@@ -47,7 +48,7 @@ public class WeatherService
         }
     }
 
-    public async Task<List<string>> GetLocationSuggestionsAsync(string query, string apiKey)
+    public async Task<List<LocationSuggestion>> GetLocationSuggestionsAsync(string query, string apiKey)
     {
         var request = new RestRequest("search.json", Method.Get);
         request.AddParameter("key", apiKey);
@@ -70,7 +71,7 @@ public class WeatherService
                 throw new InvalidOperationException("Failed to retrieve location suggestions.");
             }
 
-            return suggestions.Select(s => s.Name).ToList();
+            return suggestions;
         }
         catch (JsonException ex)
         {
