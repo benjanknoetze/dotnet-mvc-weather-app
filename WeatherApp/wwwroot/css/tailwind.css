@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/Outfit.ttf) format('ttf');
+  }
+}
 
 @layer components {
     html {
@@ -14,29 +23,68 @@
       background-size: cover;
     }
     h1 {
-      @apply text-2xl font-bold;
+      @apply text-2xl important-sm-text-xl font-bold;
+    }
+    h2 {
+      @apply text-xl important-sm-text-lg font-bold mb-3;
     }
     p {
       @apply text-base;
     }
     button {
-      @apply w-48 px-4 py-2 text-white bg-[#45b5de] font-bold rounded-md;
+      @apply w-[30%] sm:w-11/12 mt-8 px-4 py-2 sm:py-3 text-[#45b5de] bg-[#ffffff99] border-2 border-[#45b5de] font-bold rounded-md;
+    }
+    button:hover {
+      @apply bg-[#f8fdff] translate-y-[-1px] shadow-custom-hover tracking-wide duration-200 ease-in;
+    }
+    input {
+      @apply w-[80%] sm:w-11/12 px-2 py-2 sm:py-3 border border-[#599fc8] bg-[#ffffff60] text-center text-[#003f57] rounded-xl;
+    }
+    input::placeholder {
+      @apply text-[#003e5770];
+    }
+    input:focus-visible {
+      outline: solid #003f57;
     }
     input:checked ~ .dot {
       transform: translateX(100%);
       background-color: #45b5de;
     }
     .card {
-      @apply w-[80%] bg-[#f3f3f10d] mx-auto my-7 rounded border-none p-5 shadow-custom-light;
+      @apply w-4/5 sm:w-11/12 bg-[#f3f3f10d] mx-auto my-7 rounded border-none p-5 sm:space-y-10 shadow-custom-light;
     }
     #spinner {
-      @apply w-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+      @apply w-9/12 sm:w-11/12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
     }
     .loader {
-      @apply h-16 w-16 border-4 border-t-4 border-gray-200 rounded-full animate-spin;
+      @apply h-16 w-16 sm:h-10 sm:w-10 border-4 border-t-4 border-gray-200 rounded-full animate-spin;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+    #weatherDetailsCard, #weatherForm {
+      @apply space-y-4 sm:space-y-6 !important;
+    }
+    .important-sm-text-lg {
+      @apply sm:text-lg !important;
+    }
+    .important-sm-text-xl {
+      @apply sm:text-xl !important;
+    }
+    .important-sm-w {
+      @apply sm:w-11/12 left-auto !important;
+    }
+    .important-border {
+      @apply border-none !important;
+    }
+    .ui-autocomplete {
+      @apply important-border important-sm-w rounded-md shadow-custom-light;
+    }
+    .ui-widget-content {
+      @apply bg-[#f7f7f5] text-[#003f57] font-[Outfit] !important;
+    }
+    .ui-state-active {
+      @apply bg-[#45b5de] text-white border-white !important;
     }
   }
