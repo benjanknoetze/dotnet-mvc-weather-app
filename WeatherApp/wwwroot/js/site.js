@@ -55,7 +55,7 @@
         },
         minLength: 2,
         select: function (event, ui) {
-            $('#locationInput').val(ui.item.value);
+            $('#locationInput').val(`${ui.item.value}, ${ui.item.region}, ${ui.item.country}`);
             $('#regionInput').val(ui.item.region);
             $('#countryInput').val(ui.item.country);
             return false;

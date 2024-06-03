@@ -585,6 +585,16 @@ p {
   font-size: 1rem;
   line-height: 1.5rem;
 }
+body {
+  padding-bottom: 2.5rem;
+}
+@media (max-width: 639px) {
+
+  body {
+    height: auto;
+    flex-direction: column;
+  }
+}
 button {
   margin-top: 2rem;
   width: 30%;
@@ -604,7 +614,7 @@ button {
 @media (max-width: 639px) {
 
   button {
-    width: 91.666667%;
+    width: 100%;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
@@ -639,9 +649,11 @@ input {
 @media (max-width: 639px) {
 
   input {
-    width: 91.666667%;
+    width: 100%;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 input::-moz-placeholder {
@@ -681,6 +693,11 @@ input:checked ~ .dot {
     --tw-space-y-reverse: 0;
     margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
+  }
+
+  .card {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 }
 #spinner {
@@ -741,12 +758,13 @@ input:checked ~ .dot {
   }
 }
 .ui-autocomplete {
-  left: auto !important;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
 }
 @media (max-width: 639px) {
 
   .ui-autocomplete {
-    width: 91.666667% !important;
+    width: 81% !important;
   }
 }
 .ui-autocomplete {
@@ -1064,6 +1082,14 @@ input:checked ~ .dot {
   display: block;
 }
 @media (max-width: 639px) {
+
+  .sm\:relative {
+    position: relative;
+  }
+
+  .sm\:bottom-2 {
+    bottom: 0.5rem;
+  }
 
   .sm\:mx-auto {
     margin-left: auto;

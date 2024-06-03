@@ -17,8 +17,8 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="footer">
-        <div class="container absolute bottom-5 left-1/2 transform -translate-x-1/2 flex justify-center text-center text-xs">
+     <footer class="footer absolute sm:relative bottom-5 sm:bottom-2 left-1/2 transform -translate-x-1/2 flex justify-center ">
+        <div class="container text-center text-xs">
             &copy; &nbsp; <a href="https://benjan-spot.vercel.app/" target="_blank">Benjan</a>
         </div>
     </footer>
@@ -27,4 +27,5 @@
     <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
