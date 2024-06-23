@@ -1,6 +1,6 @@
 # .NET MVC Weather App
 
-A .NET MVC weather application containerized for deployment, fetching data from WeatherAPI.com.
+A .NET MVC weather application containerised for deployment, fetching data from WeatherAPI.com.
 
 ## Features
 - Fetches weather data from WeatherAPI.com
