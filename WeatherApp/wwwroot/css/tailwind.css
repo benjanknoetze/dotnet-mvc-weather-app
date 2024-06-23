@@ -32,7 +32,7 @@
       @apply text-base;
     }
     body {
-      @apply sm:flex-col sm:h-auto pb-10;
+      @apply sm:flex-col sm:h-auto pb-14;
     }
     button {
       @apply w-[30%] sm:w-[100%] mt-8 px-4 py-2 sm:py-3 text-[#45b5de] bg-[#ffffff99] border-2 border-[#45b5de] font-bold rounded-md;
