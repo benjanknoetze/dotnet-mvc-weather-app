@@ -19,6 +19,7 @@
             success: function (result) {
                 $('#weatherDetails').html(result);
                 $('#weatherDetailsCard').removeClass('hidden');
+                $('#unitToggleContainer').removeClass('hidden');
             },
             error: function () {
                 alert('Error retrieving weather data.');

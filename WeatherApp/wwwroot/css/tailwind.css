@@ -83,11 +83,28 @@
     }
     .ui-autocomplete {
       @apply important-border important-sm-w rounded-md shadow-custom-light;
+      font-family: 'Outfit', sans-serif !important;
+    }
+    .ui-menu {
+      font-family: 'Outfit', sans-serif !important;
     }
     .ui-widget-content {
-      @apply bg-[#f7f7f5] text-[#003f57] font-[Outfit] !important;
+      @apply bg-[#f7f7f5] text-[#003f57];
+      font-family: 'Outfit', sans-serif !important;
+    }
+    .ui-widget-content * {
+      font-family: 'Outfit', sans-serif !important;
+    }
+    .ui-menu-item {
+      font-family: 'Outfit', sans-serif !important;
     }
     .ui-state-active {
       @apply bg-[#45b5de] text-white border-white !important;
+      font-family: 'Outfit', sans-serif !important;
+    }
+    .ui-menu .ui-menu-item-wrapper {
+      border-radius: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
     }
   }
